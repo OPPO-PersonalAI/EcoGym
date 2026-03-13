@@ -1,0 +1,175 @@
+{
+  "version": "1.0",
+  "notes": "Demand groups are defined per category with low base_demand (10% scale). Price sensitivity uses beta tiers by necessity/daily/non-essential and epsilon per guidelines; reference_markup fixed at 1.0. Seasonality T chosen from {30,45,60,75,90} with amplitudes consistent with stability guidance. [Filtered to 8 categories]",
+  "groups": [
+    {
+      "id": "g02",
+      "name": "Toilet Paper",
+      "members": [
+        {
+          "match": "category",
+          "value": "Toilet Paper"
+        }
+      ],
+      "base_demand": 7.0,
+      "seasonality": {
+        "T": 30,
+        "phi": 2.75,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g04",
+      "name": "Fresh Fruits",
+      "members": [
+        {
+          "match": "category",
+          "value": "Fresh Fruits"
+        }
+      ],
+      "base_demand": 10.0,
+      "seasonality": {
+        "T": 90,
+        "phi": 5.8,
+        "amp": 0.5
+      },
+      "price_sensitivity": {
+        "beta": 5.4,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g08",
+      "name": "Baby Food & Formula",
+      "members": [
+        {
+          "match": "category",
+          "value": "Baby Food & Formula"
+        }
+      ],
+      "base_demand": 6.0,
+      "seasonality": {
+        "T": 45,
+        "phi": 2.2,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 4.0,
+        "epsilon": -1.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g09",
+      "name": "Body Wash & Soap",
+      "members": [
+        {
+          "match": "category",
+          "value": "Body Wash & Soap"
+        }
+      ],
+      "base_demand": 7.5,
+      "seasonality": {
+        "T": 30,
+        "phi": 4.75,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g15",
+      "name": "Cooking Oils & Vinegars",
+      "members": [
+        {
+          "match": "category",
+          "value": "Cooking Oils & Vinegars"
+        }
+      ],
+      "base_demand": 8.5,
+      "seasonality": {
+        "T": 45,
+        "phi": 0.3,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g16",
+      "name": "Frozen Meals & Pizza",
+      "members": [
+        {
+          "match": "category",
+          "value": "Frozen Meals & Pizza"
+        }
+      ],
+      "base_demand": 12.5,
+      "seasonality": {
+        "T": 60,
+        "phi": 4.1,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.6,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g18",
+      "name": "Hair Care",
+      "members": [
+        {
+          "match": "category",
+          "value": "Hair Care"
+        }
+      ],
+      "base_demand": 6.5,
+      "seasonality": {
+        "T": 30,
+        "phi": 5.95,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g24",
+      "name": "Trash Bags, Foil & Wraps",
+      "members": [
+        {
+          "match": "category",
+          "value": "Trash Bags, Foil & Wraps"
+        }
+      ],
+      "base_demand": 6.0,
+      "seasonality": {
+        "T": 30,
+        "phi": 2.1,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    }
+  ],
+  "relations": []
+}

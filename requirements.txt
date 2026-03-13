@@ -1,0 +1,9 @@
+pyyaml
+python-dotenv
+openai
+docstring_parser
+rich
+tenacity
+chromadb
+mem0ai
+colorama

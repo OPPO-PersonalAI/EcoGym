@@ -1,0 +1,217 @@
+#! -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# coding=utf-8
+# Copyright 2025 OPPO. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+model_config:
+  model_name: &main_model "gpt-5-mini-2025-08-07"  
+  timeout: 120.0
+  env_model_name: "gpt-5-mini-2025-08-07"
+  pricing_config_path: "./config/model_pricing.yaml"  
+
+run_settings:
+  max_steps: 2000
+  env_path: ".env"
+  max_days: 365
+  history_limit: 128  
+  seed: 42
+  max_actions_per_day: 5
+  excluded_tools_from_count: ["task_done"]  
+
+memory_config:
+  use_memory: false
+  user_id: "platform_freelance_01"
+
+  general_config:
+    total_prompt_limit: 15
+    embedding_config:
+      model: "text-embedding-3-small"
+
+  modules:
+    rolling_window:
+      enabled: false
+      window_size: 20
+      retrieve_top_k: 5
+      score_threshold: 0.15
+    
+    scratch_pad:
+      enabled: false
+      max_vars: 200
+      retrieve_top_k: 5
+    
+    vector_db:
+      enabled: false
+      collection_name: "freelance_bench_memory"
+      persist_directory: "./chromadb_freelance_memory"
+      retrieve_top_k: 3
+      similarity_threshold: 0.15
+    
+    mem0:
+      enabled: false
+      collection_name: "mem0_freelance_agent_facts"
+      vector_store_provider: "chroma"
+      vector_store_path: "./chromadb_mem0_freelance_storage"
+      retrieve_top_k: 5
+
+system_config:
+  max_retries: 3
+  defaults:
+    initial_voting_models: ["qwen-flash", "gpt-5-mini-2025-08-07", "deepseek-v3", "gemini-2.5-flash"]
+    system_model: "gpt-5-mini-2025-08-07"
+    agent_model: *main_model  
+
+initial_state:
+  day: 0
+  money: 1000.0
+  energy: 80    
+  stress: 10    
+  skill_rating: {}
+  task_pool: []
+  task_history: []
+  tasks_completed_today: 0
+  actions_completed_today: 0
+
+living_settings:
+  daily_living_cost: 10  
+  daily_energy_rec: 5    
+  daily_stress_red: 10            
+
+scoring_config:
+  weights:
+    short_term_money: 0.6
+    long_term_potential: 0.4
+  long_term_components:
+    skill_avg: 0.5
+    final_energy: 0.25
+    low_stress_bonus: 0.25
+  penalty:
+    hard_termination: 0.9
+    normal_termination: 1.0
+
+task_settings_config:
+  max_pool_size: 10
+  max_tasks_per_day: 3
+
+task_refresh_config:
+  free: {energy_cost: 8, stress_cost: 5, count: 2}
+  paid: {money_cost: 10, energy_cost: 5, stress_cost: 3, count: 4}
+
+relaxation_config:
+  tiers:
+    low: {cost: 15.0, energy_gain: 20, stress_drop: 10, desc: "Low cost relaxation"}
+    medium: {cost: 20.0, energy_gain: 30, stress_drop: 20, desc: "Medium cost relaxation"}
+    high: {cost: 45.0, energy_gain: 40, stress_drop: 30, desc: "High cost relaxation"}
+
+effort_calculation_config:
+  chars_per_unit_effort: 100
+
+task_config:
+  system_prompt_prefix: |
+    You are an agent designed to operate a gig economy simulation. Your goal is to maximize your Career Score (Wealth + Skills) while strictly maintaining survival (Money > 0, Energy > 0, Stress < 100).
+  system_prompt: !include:shared_system_prompt.yaml:base_system_prompt
+
+initial_pricing_config:
+  prompt_template: |
+    ### Role
+    You are a Senior Technical Project Manager. Your goal is to estimate the fair market value and required cognitive effort for a task.
+
+    ### Task Input
+    - **Category**: {category}
+    - **Complexity Hint**: {complexity_hint}
+    - **Description**: "{question}"
+
+    ### Analysis Criteria
+    1. **Skill Scarcity**: Is this a commodity task (data entry) or a niche skill (kernel debugging)?
+    2. **Cognitive Load**: Estimate the reasoning steps required.
+
+    ### Scoring Standards
+    - **Estimated Effort (1.0 - 10.0)**: 1.0=Trivial, 10.0=Extreme Complexity.
+    - **Base Payment ($1.0 - $50.0)**: Market rate based on complexity and value.
+
+    ### Output Format
+    Return strictly a JSON object:
+    {{
+        "estimated_effort": <float>,
+        "base_payment": <float>
+    }}
+
+negotiation_config:
+  max_rounds: 5
+  deal_threshold: 0.1
+  agent_prompt_template: |
+    ### Role
+    You are a Professional AI Specialist negotiating your final compensation. You are rational, profit-driven, and persuasive.
+
+    ### Context
+    - **Task**: {question}
+    - **Initial Contract**: Price = ${init_money} (based on initial expectation).
+    - **Your Work (Execution Trajectory)**:
+    """
+    {agent_trajectory}
+    """
+
+    ### Negotiation History
+    {negotiation_history}
+
+    ### Strategy: Value-Based Negotiation
+    1. **Analyze Your Trajectory**: Ignore the length. Look at the *content*.
+       - Did you perform complex reasoning?
+       - Did you handle edge cases or provide extra robustness?
+       - Did you produce a creative or highly specialized solution?
+    2. **Formulate Argument**:
+       - If your trajectory shows high-value work (e.g., self-correction, deep analysis) that exceeds a standard response, argue that the *quality* justifies a higher price.
+       - If your work was standard, defend the Initial Price.
+    3. **Counter-Strategy**: Review the System's last offer. If they resist, offer a slight compromise but maintain your value proposition.
+
+    ### Output Format
+    Return strictly a JSON object:
+    {{
+        "internal_thought": "Briefly analyze your trajectory's quality compared to the initial price...",
+        "proposed_money": <float, precision 2>,
+        "reasoning": "Persuasive message to the client highlighting specific details from your trajectory..."
+    }}
+
+  system_prompt_template: |
+    ### Role
+    You are a Contract Auditor and Budget Manager. You pay for *value*, not just effort.
+
+    ### Context
+    - **Task**: {question}
+    - **Budget Anchor**: ${init_money} (This is the standard rate).
+    - **Agent's Work (Execution Trajectory)**:
+    """
+    {agent_trajectory}
+    """
+
+    ### Negotiation History
+    {negotiation_history}
+
+    ### Decision Logic: Content Audit
+    1. **Audit the Trajectory**: Read the provided execution trace.
+       - Is the work high-quality and dense with insight? OR is it verbose, repetitive, or hallucinated?
+       - Did the Agent solve the core problem effectively?
+    2. **Valuation**:
+       - **Bonus Worthy**: If the trace shows exceptional reasoning, self-correction, or comprehensive coverage that adds real value, you may offer above the Budget Anchor.
+       - **Standard**: If the work is adequate but not special, stick close to ${init_money}.
+       - **Subpar**: If the trace is spammy or off-topic, you can even offer less (though rarely).
+    3. **Response**: Respond to the Agent's argument. If they claim "complexity," verify it in the trace.
+
+    ### Output Format
+    Return strictly a JSON object:
+    {{
+        "internal_assessment": "Evaluate the quality/value of the trajectory content...",
+        "proposed_money": <float, precision 2>,
+        "reasoning": "Message to the agent explaining your valuation based on the trace audit..."
+    }}

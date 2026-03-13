@@ -4,7 +4,7 @@ EcoGym: Evaluating LLMs for Long-Horizon Plan-and-Execute in Interactive Economi
 </h1>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2602.09514"><img src="https://img.shields.io/badge/arXiv-Preprint-b31b1b?style=flat&logo=arxiv&logoColor=white" alt="arXiv Paper"></a>
+  <a href="#"><img src="https://img.shields.io/badge/arXiv-Preprint-b31b1b?style=flat&logo=arxiv&logoColor=white" alt="arXiv Paper"></a>
   <a href="#"><img src="https://img.shields.io/badge/HuggingFace-Dataset-ff9800?style=flat&logo=huggingface" alt="Hugging Face Dataset"></a>
   <a href="#"><img src="https://img.shields.io/badge/Python-3.10-3776ab?style=flat&logo=python&logoColor=white" alt="Python 3.10"></a>
 </p>
@@ -42,27 +42,30 @@ Our empirical evaluation on EcoGym reveals a significant performance gap in curr
   <p><i>Performance comparison across eleven leading LLMs in the three EcoGym environments.</i></p>
 </div>
 
-## 📦 Code Availability
+## ⚙️ Setup
 
-**Note**: The source code for EcoGym is currently under internal compliance review and approval process. We are working to make the code publicly available as soon as the review is completed. Thank you for your patience and understanding.
+```bash
+# Create environment
+conda create -n ecogym python=3.10
+conda activate ecogym
 
-For updates on code release, please check back later or watch this repository for notifications.
-
-## 📝 Citation
-
-If you find this work useful, please cite:
-
-```bibtex
-@misc{hu2026ecogymevaluatingllmslonghorizon,
-      title={EcoGym: Evaluating LLMs for Long-Horizon Plan-and-Execute in Interactive Economies}, 
-      author={Xavier Hu and Jinxiang Xia and Shengze Xu and Kangqi Song and Yishuo Yuan and Guibin Zhang and Jincheng Ren and Boyu Feng and Li Lu and Tieyong Zeng and Jiaheng Liu and Minghao Liu and Yuchen Elenor Jiang and Wei Wang and He Zhu and Wangchunshu Zhou},
-      year={2026},
-      eprint={2602.09514},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2602.09514}, 
-}
+# Install dependencies
+pip install -r requirements.txt
 ```
+
+## 🔧 Configuration
+
+Configure your API key and model pricing:
+- Create `.env` file with your API keys
+- Set pricing in `config/model_pricing.yaml`
+
+## 🚀 Usage
+
+```bash
+python main.py --type {vending, freelance, operation}
+```
+
+Results will be saved to `logs/sessions/{session_id}/`
 
 ## 🙏 Acknowledgements
 

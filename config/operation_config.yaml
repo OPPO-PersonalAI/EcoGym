@@ -1,0 +1,160 @@
+#! -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# coding=utf-8
+# Copyright 2025 OPPO. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+run_settings:
+  env_path: ".env"
+  max_steps: 1000
+  max_days: 365
+  min_dau_threshold: 100
+  max_actions_per_day: 1 
+  history_limit: 128
+  excluded_tools_from_count: ["task_done"]
+
+model_config:
+  model_name: "gpt-5-mini-2025-08-07"
+  env_model_name: "gpt-5-mini-2025-08-07"
+  timeout: 120.0
+  pricing_config_path: "./config/model_pricing.yaml"
+
+memory_config:
+  use_memory: false
+  user_id: "platform_operator_01"
+
+  general_config:
+    total_prompt_limit: 15
+    embedding_config:
+      provider: "openai"
+      model: "text-embedding-3-small"
+
+  modules:
+    rolling_window:
+      enabled: false
+      window_size: 20
+      retrieve_top_k: 5
+      score_threshold: 0.15
+    
+    scratch_pad:
+      enabled: false
+      max_vars: 200
+      retrieve_top_k: 5
+    
+    vector_db:
+      enabled: false
+      collection_name: "operation_bench_memory"
+      persist_directory: "./chromadb_operation_memory"
+      retrieve_top_k: 3
+      similarity_threshold: 0.15
+    
+    mem0:
+      enabled: false
+      collection_name: "mem0_operation_agent_facts"
+      vector_store_provider: "chroma"
+      vector_store_path: "./chromadb_mem0_operation_storage"
+      retrieve_top_k: 5
+
+task_config:
+  system_prompt_prefix: |
+    You are a platform operations agent. Your goal is to maximize DAU (Daily Active Users) over time.
+  system_prompt: !include:shared_system_prompt.yaml:base_system_prompt
+
+platform_dynamics_config:
+  noise_config:
+    enabled: true  
+    seed: null  
+    
+    retention_noise:
+      fluctuation: 0.03  
+      
+ 
+    growth_noise:
+      fluctuation: 0.25  
+      
+    action_noise:
+      acquisition_campaign: 0.80  
+      creator_incentive: 0.60     
+      engagement_tune: 0.40       
+      moderation_tighten: 0.60    
+    
+    action_noise_absolute:
+      acquisition_campaign: 0.40  
+      creator_incentive: 0.55     
+      engagement_tune: 0.50       
+      moderation_tighten: 0.55    
+
+  retention:
+    base_retention: 0.80  
+    content_factor_weight: 0.20  
+    quality_factor_weight: 0.20  
+    engagement_factor_weight: 0.25  
+    max_retention: 0.95  
+    min_retention: 0.30  
+  
+  natural_growth:
+    base_growth: 5  
+    quality_multiplier: 60  
+    creator_multiplier: 60  
+  
+  decay:
+    quality_decay: 0.05  
+    quality_equilibrium: 0.00  
+    creator_decay: 0.05  
+    creator_equilibrium: 0.00  
+    content_decay_rate: 0.05  
+    engagement_decay: 0.08  
+  
+  content_ecosystem:
+      content_creation_multiplier: 30  
+      content_quality_bonus: 0.5  
+  
+  actions:
+    acquisition_boost:
+      base_new_users: 20  
+      quality_bonus_rate: 1.1  
+    
+    creator_incentive:
+      activity_boost_base: 0.25  
+      diminishing_factor: 1.1  
+      content_multiplier: 50  
+    
+    engagement_tune:
+      engagement_boost: 0.25  
+      quality_penalty: 0.05  
+    
+    moderation_tighten:
+      quality_boost_base: 0.30  
+      diminishing_factor: 1.1  
+      content_removal_rate: 0.10  
+      creator_penalty_base: 0.07  
+      penalty_amplifier: 1.1  
+
+initial_state:
+  day: 0
+  dau: 1000  
+  content_volume: 100  
+  content_quality: 0.5  
+  creator_activity: 0.5  
+  engagement_level: 0.0  
+  action_history: []  
+  dau_history: []  
+
+state_context_keys:
+  - "day"
+  - "dau"
+  - "content_volume"
+  - "content_quality"
+  - "creator_activity"
+  - "engagement_level"

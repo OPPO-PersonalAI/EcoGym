@@ -1,0 +1,983 @@
+{
+  "version": "1.0",
+  "notes": "Demand groups are defined per category with low base_demand (10% scale). Price sensitivity uses beta tiers by necessity/daily/non-essential and epsilon per guidelines; reference_markup fixed at 1.0. Seasonality T chosen from {30,45,60,75,90} with amplitudes consistent with stability guidance.",
+  "groups": [
+    {
+      "id": "g01",
+      "name": "Canned & Jarred Food",
+      "members": [
+        {
+          "match": "category",
+          "value": "Canned & Jarred Food"
+        }
+      ],
+      "base_demand": 9.0,
+      "seasonality": {
+        "T": 60,
+        "phi": 1.1,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g02",
+      "name": "Toilet Paper",
+      "members": [
+        {
+          "match": "category",
+          "value": "Toilet Paper"
+        }
+      ],
+      "base_demand": 7.0,
+      "seasonality": {
+        "T": 30,
+        "phi": 2.75,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g03",
+      "name": "Seasonal & Party Supplies",
+      "members": [
+        {
+          "match": "category",
+          "value": "Seasonal & Party Supplies"
+        }
+      ],
+      "base_demand": 5.0,
+      "seasonality": {
+        "T": 90,
+        "phi": 4.2,
+        "amp": 0.5
+      },
+      "price_sensitivity": {
+        "beta": 6.67,
+        "epsilon": -3.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g04",
+      "name": "Fresh Fruits",
+      "members": [
+        {
+          "match": "category",
+          "value": "Fresh Fruits"
+        }
+      ],
+      "base_demand": 10.0,
+      "seasonality": {
+        "T": 90,
+        "phi": 5.8,
+        "amp": 0.5
+      },
+      "price_sensitivity": {
+        "beta": 5.4,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g05",
+      "name": "Water & Sparkling Water",
+      "members": [
+        {
+          "match": "category",
+          "value": "Water & Sparkling Water"
+        }
+      ],
+      "base_demand": 18.0,
+      "seasonality": {
+        "T": 75,
+        "phi": 0.6,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.4,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g06",
+      "name": "Yogurt & Butter",
+      "members": [
+        {
+          "match": "category",
+          "value": "Yogurt & Butter"
+        }
+      ],
+      "base_demand": 11.0,
+      "seasonality": {
+        "T": 60,
+        "phi": 3.3,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g07",
+      "name": "Ice Cream & Desserts",
+      "members": [
+        {
+          "match": "category",
+          "value": "Ice Cream & Desserts"
+        }
+      ],
+      "base_demand": 12.0,
+      "seasonality": {
+        "T": 90,
+        "phi": 1.9,
+        "amp": 0.8
+      },
+      "price_sensitivity": {
+        "beta": 6.67,
+        "epsilon": -3.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g08",
+      "name": "Baby Food & Formula",
+      "members": [
+        {
+          "match": "category",
+          "value": "Baby Food & Formula"
+        }
+      ],
+      "base_demand": 6.0,
+      "seasonality": {
+        "T": 45,
+        "phi": 2.2,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 4.0,
+        "epsilon": -1.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g09",
+      "name": "Body Wash & Soap",
+      "members": [
+        {
+          "match": "category",
+          "value": "Body Wash & Soap"
+        }
+      ],
+      "base_demand": 7.5,
+      "seasonality": {
+        "T": 30,
+        "phi": 4.75,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g10",
+      "name": "Beer, Wine & Spirits",
+      "members": [
+        {
+          "match": "category",
+          "value": "Beer, Wine & Spirits"
+        }
+      ],
+      "base_demand": 8.0,
+      "seasonality": {
+        "T": 75,
+        "phi": 0.95,
+        "amp": 0.3
+      },
+      "price_sensitivity": {
+        "beta": 6.67,
+        "epsilon": -3.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g11",
+      "name": "Fresh Vegetables",
+      "members": [
+        {
+          "match": "category",
+          "value": "Fresh Vegetables"
+        }
+      ],
+      "base_demand": 9.5,
+      "seasonality": {
+        "T": 90,
+        "phi": 5.4,
+        "amp": 0.5
+      },
+      "price_sensitivity": {
+        "beta": 5.4,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g12",
+      "name": "Batteries & Light Bulbs",
+      "members": [
+        {
+          "match": "category",
+          "value": "Batteries & Light Bulbs"
+        }
+      ],
+      "base_demand": 4.5,
+      "seasonality": {
+        "T": 30,
+        "phi": 1.5,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g13",
+      "name": "Rice, Grains & Beans",
+      "members": [
+        {
+          "match": "category",
+          "value": "Rice, Grains & Beans"
+        }
+      ],
+      "base_demand": 13.0,
+      "seasonality": {
+        "T": 45,
+        "phi": 2.4,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 4.0,
+        "epsilon": -1.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g14",
+      "name": "Kitchenware & Utensils",
+      "members": [
+        {
+          "match": "category",
+          "value": "Kitchenware & Utensils"
+        }
+      ],
+      "base_demand": 4.0,
+      "seasonality": {
+        "T": 60,
+        "phi": 3.8,
+        "amp": 0.2
+      },
+      "price_sensitivity": {
+        "beta": 6.67,
+        "epsilon": -3.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g15",
+      "name": "Cooking Oils & Vinegars",
+      "members": [
+        {
+          "match": "category",
+          "value": "Cooking Oils & Vinegars"
+        }
+      ],
+      "base_demand": 8.5,
+      "seasonality": {
+        "T": 45,
+        "phi": 0.3,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g16",
+      "name": "Frozen Meals & Pizza",
+      "members": [
+        {
+          "match": "category",
+          "value": "Frozen Meals & Pizza"
+        }
+      ],
+      "base_demand": 12.5,
+      "seasonality": {
+        "T": 60,
+        "phi": 4.1,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.6,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g17",
+      "name": "Breakfast Cereals",
+      "members": [
+        {
+          "match": "category",
+          "value": "Breakfast Cereals"
+        }
+      ],
+      "base_demand": 10.5,
+      "seasonality": {
+        "T": 45,
+        "phi": 1.25,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g18",
+      "name": "Hair Care",
+      "members": [
+        {
+          "match": "category",
+          "value": "Hair Care"
+        }
+      ],
+      "base_demand": 6.5,
+      "seasonality": {
+        "T": 30,
+        "phi": 5.95,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g19",
+      "name": "Soft Drinks & Juices",
+      "members": [
+        {
+          "match": "category",
+          "value": "Soft Drinks & Juices"
+        }
+      ],
+      "base_demand": 19.0,
+      "seasonality": {
+        "T": 75,
+        "phi": 2.95,
+        "amp": 0.3
+      },
+      "price_sensitivity": {
+        "beta": 5.6,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g20",
+      "name": "Fresh Meat",
+      "members": [
+        {
+          "match": "category",
+          "value": "Fresh Meat"
+        }
+      ],
+      "base_demand": 8.0,
+      "seasonality": {
+        "T": 90,
+        "phi": 1.7,
+        "amp": 0.4
+      },
+      "price_sensitivity": {
+        "beta": 5.4,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g21",
+      "name": "Eggs",
+      "members": [
+        {
+          "match": "category",
+          "value": "Eggs"
+        }
+      ],
+      "base_demand": 9.0,
+      "seasonality": {
+        "T": 45,
+        "phi": 3.05,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g22",
+      "name": "Spices & Seasonings",
+      "members": [
+        {
+          "match": "category",
+          "value": "Spices & Seasonings"
+        }
+      ],
+      "base_demand": 7.0,
+      "seasonality": {
+        "T": 60,
+        "phi": 5.2,
+        "amp": 0.2
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g23",
+      "name": "Frozen Vegetables & Fruits",
+      "members": [
+        {
+          "match": "category",
+          "value": "Frozen Vegetables & Fruits"
+        }
+      ],
+      "base_demand": 8.5,
+      "seasonality": {
+        "T": 60,
+        "phi": 0.85,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g24",
+      "name": "Trash Bags, Foil & Wraps",
+      "members": [
+        {
+          "match": "category",
+          "value": "Trash Bags, Foil & Wraps"
+        }
+      ],
+      "base_demand": 6.0,
+      "seasonality": {
+        "T": 30,
+        "phi": 2.1,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g25",
+      "name": "Baking Ingredients",
+      "members": [
+        {
+          "match": "category",
+          "value": "Baking Ingredients"
+        }
+      ],
+      "base_demand": 7.5,
+      "seasonality": {
+        "T": 45,
+        "phi": 4.5,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g26",
+      "name": "Paper Towels & Tissues",
+      "members": [
+        {
+          "match": "category",
+          "value": "Paper Towels & Tissues"
+        }
+      ],
+      "base_demand": 6.5,
+      "seasonality": {
+        "T": 30,
+        "phi": 0.15,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g27",
+      "name": "Laundry Detergent & Supplies",
+      "members": [
+        {
+          "match": "category",
+          "value": "Laundry Detergent & Supplies"
+        }
+      ],
+      "base_demand": 6.5,
+      "seasonality": {
+        "T": 30,
+        "phi": 3.55,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g28",
+      "name": "Health & First Aid",
+      "members": [
+        {
+          "match": "category",
+          "value": "Health & First Aid"
+        }
+      ],
+      "base_demand": 5.5,
+      "seasonality": {
+        "T": 30,
+        "phi": 5.6,
+        "amp": 0.1
+      },
+      "price_sensitivity": {
+        "beta": 5.0,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g29",
+      "name": "Diapers & Baby Care",
+      "members": [
+        {
+          "match": "category",
+          "value": "Diapers & Baby Care"
+        }
+      ],
+      "base_demand": 5.0,
+      "seasonality": {
+        "T": 45,
+        "phi": 1.35,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 4.0,
+        "epsilon": -1.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g30",
+      "name": "Sauces & Marinades",
+      "members": [
+        {
+          "match": "category",
+          "value": "Sauces & Marinades"
+        }
+      ],
+      "base_demand": 7.0,
+      "seasonality": {
+        "T": 60,
+        "phi": 2.55,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g31",
+      "name": "Pasta & Noodles",
+      "members": [
+        {
+          "match": "category",
+          "value": "Pasta & Noodles"
+        }
+      ],
+      "base_demand": 11.0,
+      "seasonality": {
+        "T": 45,
+        "phi": 4.85,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g32",
+      "name": "Seafood",
+      "members": [
+        {
+          "match": "category",
+          "value": "Seafood"
+        }
+      ],
+      "base_demand": 5.5,
+      "seasonality": {
+        "T": 90,
+        "phi": 0.45,
+        "amp": 0.4
+      },
+      "price_sensitivity": {
+        "beta": 5.4,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g33",
+      "name": "Cheese",
+      "members": [
+        {
+          "match": "category",
+          "value": "Cheese"
+        }
+      ],
+      "base_demand": 11.0,
+      "seasonality": {
+        "T": 60,
+        "phi": 3.65,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g34",
+      "name": "Tea",
+      "members": [
+        {
+          "match": "category",
+          "value": "Tea"
+        }
+      ],
+      "base_demand": 7.0,
+      "seasonality": {
+        "T": 75,
+        "phi": 5.05,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.4,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g35",
+      "name": "Milk & Cream",
+      "members": [
+        {
+          "match": "category",
+          "value": "Milk & Cream"
+        }
+      ],
+      "base_demand": 14.0,
+      "seasonality": {
+        "T": 45,
+        "phi": 0.75,
+        "amp": 0.15
+      },
+      "price_sensitivity": {
+        "beta": 4.0,
+        "epsilon": -1.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g36",
+      "name": "Chocolate & Candy",
+      "members": [
+        {
+          "match": "category",
+          "value": "Chocolate & Candy"
+        }
+      ],
+      "base_demand": 16.0,
+      "seasonality": {
+        "T": 75,
+        "phi": 2.35,
+        "amp": 0.4
+      },
+      "price_sensitivity": {
+        "beta": 6.67,
+        "epsilon": -3.0,
+        "reference_markup": 1.0
+      }
+    },
+    {
+      "id": "g37",
+      "name": "Condiments & Salad Dressings",
+      "members": [
+        {
+          "match": "category",
+          "value": "Condiments & Salad Dressings"
+        }
+      ],
+      "base_demand": 7.5,
+      "seasonality": {
+        "T": 60,
+        "phi": 4.35,
+        "amp": 0.25
+      },
+      "price_sensitivity": {
+        "beta": 5.2,
+        "epsilon": -2.0,
+        "reference_markup": 1.0
+      }
+    }
+  ],
+  "relations": [
+    {
+      "from": "g31",
+      "to": "g30",
+      "type": "complement",
+      "strength": 0.7
+    },
+    {
+      "from": "g31",
+      "to": "g22",
+      "type": "complement",
+      "strength": 0.4
+    },
+    {
+      "from": "g31",
+      "to": "g15",
+      "type": "complement",
+      "strength": 0.5
+    },
+    {
+      "from": "g13",
+      "to": "g15",
+      "type": "complement",
+      "strength": 0.6
+    },
+    {
+      "from": "g13",
+      "to": "g22",
+      "type": "complement",
+      "strength": 0.5
+    },
+    {
+      "from": "g13",
+      "to": "g30",
+      "type": "complement",
+      "strength": 0.4
+    },
+    {
+      "from": "g17",
+      "to": "g35",
+      "type": "complement",
+      "strength": 0.7
+    },
+    {
+      "from": "g34",
+      "to": "g35",
+      "type": "complement",
+      "strength": 0.3
+    },
+    {
+      "from": "g10",
+      "to": "g36",
+      "type": "complement",
+      "strength": 0.4
+    },
+    {
+      "from": "g16",
+      "to": "g19",
+      "type": "complement",
+      "strength": 0.5
+    },
+    {
+      "from": "g01",
+      "to": "g31",
+      "type": "complement",
+      "strength": 0.4
+    },
+    {
+      "from": "g23",
+      "to": "g16",
+      "type": "complement",
+      "strength": 0.2
+    },
+    {
+      "from": "g25",
+      "to": "g22",
+      "type": "complement",
+      "strength": 0.3
+    },
+    {
+      "from": "g25",
+      "to": "g15",
+      "type": "complement",
+      "strength": 0.3
+    },
+    {
+      "from": "g37",
+      "to": "g20",
+      "type": "complement",
+      "strength": 0.4
+    },
+    {
+      "from": "g37",
+      "to": "g11",
+      "type": "complement",
+      "strength": 0.3
+    },
+    {
+      "from": "g15",
+      "to": "g11",
+      "type": "complement",
+      "strength": 0.4
+    },
+    {
+      "from": "g15",
+      "to": "g20",
+      "type": "complement",
+      "strength": 0.3
+    },
+    {
+      "from": "g30",
+      "to": "g20",
+      "type": "complement",
+      "strength": 0.4
+    },
+    {
+      "from": "g30",
+      "to": "g32",
+      "type": "complement",
+      "strength": 0.3
+    },
+    {
+      "from": "g19",
+      "to": "g05",
+      "type": "competition",
+      "strength": 0.7
+    },
+    {
+      "from": "g19",
+      "to": "g34",
+      "type": "competition",
+      "strength": 0.4
+    },
+    {
+      "from": "g36",
+      "to": "g07",
+      "type": "competition",
+      "strength": 0.5
+    },
+    {
+      "from": "g04",
+      "to": "g36",
+      "type": "competition",
+      "strength": 0.3
+    },
+    {
+      "from": "g06",
+      "to": "g07",
+      "type": "competition",
+      "strength": 0.3
+    },
+    {
+      "from": "g20",
+      "to": "g32",
+      "type": "competition",
+      "strength": 0.6
+    },
+    {
+      "from": "g11",
+      "to": "g23",
+      "type": "competition",
+      "strength": 0.4
+    },
+    {
+      "from": "g01",
+      "to": "g11",
+      "type": "competition",
+      "strength": 0.3
+    },
+    {
+      "from": "g01",
+      "to": "g23",
+      "type": "competition",
+      "strength": 0.2
+    },
+    {
+      "from": "g13",
+      "to": "g31",
+      "type": "competition",
+      "strength": 0.5
+    },
+    {
+      "from": "g17",
+      "to": "g06",
+      "type": "competition",
+      "strength": 0.3
+    },
+    {
+      "from": "g10",
+      "to": "g19",
+      "type": "competition",
+      "strength": 0.2
+    },
+    {
+      "from": "g21",
+      "to": "g17",
+      "type": "competition",
+      "strength": 0.2
+    }
+  ]
+}

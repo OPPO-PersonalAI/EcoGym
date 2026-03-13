@@ -1,0 +1,100 @@
+#! -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# coding=utf-8
+# Copyright 2025 OPPO. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+run_settings:
+  env_path: ".env"
+  max_steps: 2000
+  max_days: 365
+  no_sales_days_threshold: 365
+  max_actions_per_day: 4
+  history_limit: 128
+  excluded_tools_from_count: ["task_done"]
+
+model_config:
+  model_name: "gpt-5-mini-2025-08-07"  
+  env_model_name: "gpt-5-mini-2025-08-07"
+  timeout: 120.0
+  pricing_config_path: "./config/model_pricing.yaml"
+
+memory_config:
+  use_memory: false
+  user_id: "platform_vending_02"
+
+  general_config:
+    total_prompt_limit: 15
+    embedding_config:
+      model: "text-embedding-3-small"
+
+  modules:
+    rolling_window:
+      enabled: false
+      window_size: 20
+      retrieve_top_k: 5
+      score_threshold: 0.15
+    
+    scratch_pad:
+      enabled: false
+      max_vars: 200
+      retrieve_top_k: 5
+    
+    vector_db:
+      enabled: false
+      collection_name: "vending_bench_memory"
+      persist_directory: "./chromadb_vending_memory"
+      retrieve_top_k: 3
+      similarity_threshold: 0.15
+    
+    mem0:
+      enabled: false
+      collection_name: "mem0_vending_agent_facts"
+      vector_store_provider: "chroma"
+      vector_store_path: "./chromadb_mem0_vending_storage"
+      retrieve_top_k: 5 
+
+task_config:
+  system_prompt_prefix: |
+    You are an agent designed to operate a shopping mall business. Your goal is to maximize your profit.
+  system_prompt: !include:shared_system_prompt.yaml:base_system_prompt
+
+data_config:
+  demand_structure_path: "./data/vending/demand_structure.json"
+  product_catalog_path: "./data/vending/products.jsonl"  
+
+tools_config:
+  supplier:
+    product_db_path: "./data/vending/products.jsonl"  
+    use_embeddings: true  
+    embedding_model: "text-embedding-3-small"  
+initial_state:
+  money: 100
+  day: 0
+  product_prices: {}
+  product_quantities: {}
+  product_categories: {}
+  wholesale_prices: {}
+  sales_history: []
+  orders: []
+  products: []
+  day_history: []
+
+state_context_keys:
+  - "money"
+  - "day"
+  - "product_quantities"  
+  - "wholesale_prices"    
+  - "orders"              
+  - "products"           
